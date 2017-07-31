@@ -57,100 +57,15 @@
     <div class="panel-overlay"></div>
     <!-- Left panel with reveal effect-->
     <div class="panel panel-left panel-reveal">
-				<div class="navbar"  style="background:#FFF;color:#5a5a5a;">
-					  <div class="navbar-inner">
-						<div class="center">ตั้งค่าระยะค้นหาสถานีตำรวจ</div>
-					  </div>
-				</div>
-
-		<div class="list-block" style="padding:0px;margin:0px;color:#5a5a5a;">
-		<form id="myForm">
-		  <ul>
-			<!-- Single radio input -->
-			<li>
-			  <label class="label-radio item-content">
-				<!-- Checked by default -->
-				<input type="radio" name="my-radio" value="20" checked="checked">
-				<div class="item-media">
-				  <i class="icon icon-form-radio"></i>
-				</div>
-				<div class="item-inner">
-				  <div class="item-title">20 กิโลเมตร</div>
-				</div>
-			  </label>
-			</li>
-			<!-- Another radio input -->
-			<li>
-			  <label class="label-radio item-content">
-				<input type="radio" name="my-radio" value="40">
-				<div class="item-media">
-				  <i class="icon icon-form-radio"></i>
-				</div>
-				<div class="item-inner">
-				  <div class="item-title">40 กิโลเมตร</div>
-				</div>
-			  </label>
-			</li>
-			<!-- Another radio input -->
-			<li>
-			  <label class="label-radio item-content">
-				<input type="radio" name="my-radio" value="60">
-				<div class="item-media">
-				  <i class="icon icon-form-radio"></i>
-				</div>
-				<div class="item-inner">
-				  <div class="item-title">60 กิโลเมตร</div>
-				</div>
-			  </label>
-			</li>
-			<!-- Another radio input -->
-			<li>
-			  <label class="label-radio item-content">
-				<input type="radio" name="my-radio" value="80">
-				<div class="item-media">
-				  <i class="icon icon-form-radio"></i>
-				</div>
-				<div class="item-inner">
-				  <div class="item-title">80 กิโลเมตร</div>
-				</div>
-			  </label>
-			</li>			<!-- Another radio input -->
-			<li>
-			  <label class="label-radio item-content">
-				<input type="radio" name="my-radio" value="100">
-				<div class="item-media">
-				  <i class="icon icon-form-radio"></i>
-				</div>
-				<div class="item-inner">
-				  <div class="item-title">100 กิโลเมตร</div>
-				</div>
-			  </label>
-			</li>
-
-		  </ul>
-		</form>    
-
-	<ul style="background:#f6f6f6;color:#5f5f5f;">
-    <li>
-      <a href="#" data-popup=".popup-develop" class="item-link item-content open-popup">
-        <div class="item-media"><img src="img/logo.png" style="width:40px;"></div>
-        <div class="item-inner">
-          <div class="item-title">ผู้พัฒนา</div>
-          <div class="item-after"></div>
-        </div>
-      </a>
-    </li>
-	</ul>
-
-		</div>  
-  </div>
+	
+    </div>
 
     <!-- Views -->
     <div class="views">
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
             <!-- Top Navbar-->
-            <div class="navbar" style="background:#e02c2c;">
+            <div class="navbar" style="background:#45191b;">
                 <div class="navbar-inner">
                     <div class="left">
                         <!--
@@ -163,10 +78,10 @@
                     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
                     <div class="center sliding">
 					
-							<!-- Search Bar ค้นหาสถานีตำรวจ -->
-							<form class="searchbar"  style="background:#e02c2c;">
+							<!-- Search Bar -->
+							<form class="searchbar"  style="background:#45191b;">
 								<div class="searchbar-input">
-									<input type="search" placeholder="ค้นหาสถานีตำรวจ" id="searchstation">
+									<input type="search" placeholder="Search">
 									<a href="#" class="searchbar-clear"></a>
 								</div>
 								<a href="#" class="searchbar-cancel">Cancel</a>
@@ -233,7 +148,7 @@
 
 	  <!-- About Popup รายละเอียด -->
 	  <div class="popup popup-about">
-				<div class="navbar"  style="background:#e02c2c;">
+				<div class="navbar"  style="background:#45191b;">
 					  <div class="navbar-inner">
 						<div class="left">&nbsp;&nbsp;&nbsp;<i class="f7-icons" onclick="closepopup()">arrow_left</i></div>
 						<div class="center">รายละเอียด</div>
@@ -247,35 +162,32 @@
 							  <div class="toolbar-inner">
 										<div class="content-block"  style="padding:0px;margin:0px;width:100%;">										
 
+												<p><a href="#" class="button button-big button-fill color-orange" style="font-size:20px;">โทรด่วน</a></p>
 
-														<div id="detailstation"></div>
-													
+												<div class="list-block" style="padding:0px;margin:0px;">
+													<ul>
+														
+															    <li class="item-content">
+																  <div class="item-media"><img src="img/job-royal-thai-police.png" width="50" height="50"></div>
+																  <div class="item-inner">
+																	<div>																	
+																	
+																			<div style="font-size:16px;color:#000;">โรงแรม ทองธารินทร์ </div>
+																			<div style="font-size:12px;color:#707070;">โรงแรมทองธารินทร์ ทุ่มเทมอบความสะดวกสบายแก่ผู้เข้าพัก dsdsds sdsd ด้วsdsdsdsdยบร...</div>
+																			<div style="font-size:12px;color:#707070;"><i class="f7-icons color-orange" style="font-size:20px;">phone_round_fill</i> 044-511007 &nbsp;&nbsp;ระยะทาง 2.68 <span class="list1">กม.</span></div>
+																	</div>
+																  </div>
+																</li>													
+													</ul>
+												  </div><!-- list สถานีตำรวจ -->
 										</div>			
 							  </div>
 							</div>      
+
+
 	  </div>
 
-	  <!-- About Popup รายละเอียด -->
-	  <div class="popup popup-develop">
-				<div class="navbar"  style="background:#e02c2c;">
-					  <div class="navbar-inner">
-						<div class="left">&nbsp;&nbsp;&nbsp;<i class="f7-icons" onclick="closepopupdevelop()">arrow_left</i></div>
-						<div class="center">ผู้พัฒนา</div>
-					  </div>
-				</div>
-				<div class="content-block" style="padding:0px;margin:0px;color:#5a5a5a;">
-				<img src="img/19106075_1776938208999997_3494228537724665112_n.png" style="width:100%;">
-				<div style="padding:10px;">
-				<div>ผู้พัฒนา</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ส.ต.ต. วสันต์  ในณงค์</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ผบ.หมู่ งานป้องกันปราบปราม สภ.เมืองสุรินทร์</div>
-				
-				<div>&nbsp;</div>
-				<div>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;แอพพลิคชั่นนี้เป็นแอพพลิเคชั่นสำหรับค้นหาสถานีตำรวจรอบๆตัวเรา บอกสถานีตำรวจไหนใกล้ตัวเราที่สุด มีรายละเอียดของสถานีตำรวจนั้น เบอร์โทร ปุ่มสำหรับโทรด่วน เมื่อมีเหตุฉุกเฉิน สามารถแจ้งเข้าสถานีตำรวจใกล้ตัวคุณโดยตรง ผู้พัฒนาหวังว่าแอพพลิเคชั่นนี้จะเป็นประโยชน์กับผู้ใช้ เมื่อมีเหตุจำเป็น ฉุกเฉิน</div>
-				</div>
-				</div>
-				</div>				     
-	  </div>
+
 
     <script type="text/javascript" src="cordova.js"></script>
     <script type="text/javascript" src="lib/jquery-ui-1.12.1/external/jquery/jquery.js"></script>
