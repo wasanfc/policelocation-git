@@ -88,7 +88,6 @@ $$('#tab-2').on('show', function () {
 		var openpopuplon=lon;
 		$('#mapdetail').css('height',$(window).height()-250);				
 		$('#bottomdetail').css('height',$(window).height()-$('#mapdetail').height()-$('.navbar').height());
-		$('#t').html('<div class="center">รายละเอียด</div>');
 		setTimeout(function(){
 			//$('#mapdetail').css('height',$(window).height()-$('.toolbar').height());				
 			initMapDetail(openpopupaddress,openpopupname,openpopuptel,openpopuptels,openpopupdis,openpopuplat,openpopuplon);

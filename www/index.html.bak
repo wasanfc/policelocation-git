@@ -236,7 +236,7 @@
 				<div class="navbar"  style="background:#e02c2c;">
 					  <div class="navbar-inner">
 						<div class="left">&nbsp;&nbsp;&nbsp;<i class="f7-icons" onclick="closepopup()">arrow_left</i></div>
-						<div id="t"></div>
+						<div class="center"><div id="t"></div></div>
 					  </div>
 				</div>
 				<div class="content-block" style="padding:0px;margin:0px;">
