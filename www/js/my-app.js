@@ -269,8 +269,8 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 			//opendb= window.openDatabase({name: "js/policelocation.db"});
 			opendb = window.openDatabase("policelocation", "1.0", "policelocation_db", 10000);alert("22");
 			opendb.transaction(function(tx){					 
-				 tx.executeSql('DROP TABLE policelocation');
-				 tx.executeSql('DROP TABLE locationold');
+				 //tx.executeSql('DROP TABLE policelocation');
+				 //tx.executeSql('DROP TABLE locationold');
 				 tx.executeSql('CREATE TABLE IF NOT EXISTS policelocation (id integer NOT NULL PRIMARY KEY AUTOINCREMENT,address TEXT,name TEXT,lat TEXT)');
 				 tx.executeSql('CREATE TABLE IF NOT EXISTS locationold (id integer NOT NULL PRIMARY KEY AUTOINCREMENT,lat TEXT,lon TEXT)');
 				 tx.executeSql('SELECT * FROM policelocation', [], function(txs, results){ 
