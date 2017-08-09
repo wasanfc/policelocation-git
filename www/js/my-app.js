@@ -82,7 +82,7 @@ $$('#tab-2').on('show', function () {
 	function opendevelop(){ 
 		pageGlobal="popupde";
 	}
-	function openpopup(address,name,tel,tels,dis,lat,lon) {	
+	function openpopup(address,name,tel,tels,dis,lat,lon) {	 //console.log(lat);
 		pageGlobal="popup";
 		var openpopupaddress=address;
 		var openpopupname=name;
@@ -144,14 +144,14 @@ $$('#tab-2').on('show', function () {
 
 
 	function initMapDetail(address,name,tel,tels,dis,lat,lon) {// แผนที่ popup	 
-		//alert(address+"-"+name+"-"+tel+"-"+tels+"-"+dis+"-"+lat+"-"+lon);
+		//console.log(address+"-"+name+"-"+tel+"-"+tels+"-"+dis+"-"+lat+"-"+lon);
 		//var m='<img src="https://maps.googleapis.com/maps/api/directions/json?origin=Chicago,IL&destination=Los+Angeles,CA&waypoints=Joplin,MO|Oklahoma+City,OK&key=AIzaSyBN3bpGYSZ7rLkgRcrw4LzLlf13SdOGu_0">';
 
 	$.getJSON('https://maps.googleapis.com/maps/api/directions/json?origin='+lat+','+lon+'&destination='+latUser+','+lonUser+'&mode=driving&key=AIzaSyBN3bpGYSZ7rLkgRcrw4LzLlf13SdOGu_0&callback', function(data) {
 	//console.log(data.routes[0].overview_polyline.points);
     //data is the JSON string
 var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60);
-	var m='<img src="https://maps.googleapis.com/maps/api/staticmap?size='+x+'&path=enc%3A'+data.routes[0].overview_polyline.points+'&markers=icon:https://maps.gstatic.com/mapfiles/ms2/micons/man.png%7Clabel:P%7C'+lat+','+lon+'&markers=icon:https://maps.gstatic.com/mapfiles/ms2/micons/police.png%7Clabel:U%7C'+latUser+','+lonUser+'">';
+	var m='<img src="https://maps.googleapis.com/maps/api/staticmap?size='+x+'&path=enc%3A'+data.routes[0].overview_polyline.points+'&markers=icon:https://maps.gstatic.com/mapfiles/ms2/micons/man.png%7Clabel:P%7C'+latUser+','+lonUser+'&markers=icon:https://maps.gstatic.com/mapfiles/ms2/micons/police.png%7Clabel:U%7C'+lat+','+lon+'">';
 	$('#mapdetail').html(m);
 });
 						//&markers=size:mid%7Ccolor:red%7CSan+Francisco,CA%7COakland,CA%7CSan+Jose,CA
@@ -269,8 +269,8 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 			//opendb= window.openDatabase({name: "js/policelocation.db"});
 			opendb = window.openDatabase("policelocation", "1.0", "policelocation_db", 10000);
 			opendb.transaction(function(tx){					 
-				 //tx.executeSql('DROP TABLE policelocation');
-				 //tx.executeSql('DROP TABLE locationold');
+				 tx.executeSql('DROP TABLE policelocation');
+				 tx.executeSql('DROP TABLE locationold');
 				 tx.executeSql('CREATE TABLE IF NOT EXISTS policelocation (id integer NOT NULL PRIMARY KEY AUTOINCREMENT,address TEXT,name TEXT,lat TEXT)');
 				 tx.executeSql('CREATE TABLE IF NOT EXISTS locationold (id integer NOT NULL PRIMARY KEY AUTOINCREMENT,lat TEXT,lon TEXT)');
 				 tx.executeSql('SELECT * FROM policelocation', [], function(txs, results){ 		
@@ -457,7 +457,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 									if(parseInt(getDistanceFromLatLonInKm(lat,lon,latUser,lonUser))<parseInt(distanceUser)){// เชคระยะว่าจะแสดงภายในกี่ กม.
 										var image = {
 										  url: "img/x.png"
-										};										
+										};			
 										var m = new google.maps.Marker({
 											position: new google.maps.LatLng(lat, lon),
 											icon:image,
@@ -516,7 +516,6 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 							var b = a.split(",");
 							var lat=b[1];
 							var lon=b[0];
-
 							var dis=(getDistanceFromLatLonInKm(lat,lon,latUser,lonUser)).toFixed(2);
 							obList[i]['dis']=dis;
 							obList[i]['name']=name;

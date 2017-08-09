@@ -82,7 +82,7 @@ $$('#tab-2').on('show', function () {
 	function opendevelop(){ 
 		pageGlobal="popupde";
 	}
-	function openpopup(address,name,tel,tels,dis,lat,lon) {	
+	function openpopup(address,name,tel,tels,dis,lat,lon) {	 //console.log(lat);
 		pageGlobal="popup";
 		var openpopupaddress=address;
 		var openpopupname=name;
@@ -144,7 +144,7 @@ $$('#tab-2').on('show', function () {
 
 
 	function initMapDetail(address,name,tel,tels,dis,lat,lon) {// แผนที่ popup	 
-		//alert(address+"-"+name+"-"+tel+"-"+tels+"-"+dis+"-"+lat+"-"+lon);
+		//console.log(address+"-"+name+"-"+tel+"-"+tels+"-"+dis+"-"+lat+"-"+lon);
 		//var m='<img src="https://maps.googleapis.com/maps/api/directions/json?origin=Chicago,IL&destination=Los+Angeles,CA&waypoints=Joplin,MO|Oklahoma+City,OK&key=AIzaSyBN3bpGYSZ7rLkgRcrw4LzLlf13SdOGu_0">';
 
 	$.getJSON('https://maps.googleapis.com/maps/api/directions/json?origin='+lat+','+lon+'&destination='+latUser+','+lonUser+'&mode=driving&key=AIzaSyBN3bpGYSZ7rLkgRcrw4LzLlf13SdOGu_0&callback', function(data) {
@@ -457,7 +457,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 									if(parseInt(getDistanceFromLatLonInKm(lat,lon,latUser,lonUser))<parseInt(distanceUser)){// เชคระยะว่าจะแสดงภายในกี่ กม.
 										var image = {
 										  url: "img/x.png"
-										};										
+										};			
 										var m = new google.maps.Marker({
 											position: new google.maps.LatLng(lat, lon),
 											icon:image,
@@ -516,7 +516,6 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 							var b = a.split(",");
 							var lat=b[1];
 							var lon=b[0];
-
 							var dis=(getDistanceFromLatLonInKm(lat,lon,latUser,lonUser)).toFixed(2);
 							obList[i]['dis']=dis;
 							obList[i]['name']=name;
