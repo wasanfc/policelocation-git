@@ -392,6 +392,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 										}
 										if(chkstart==0){ // เชคว่าเข้าแอพเป็นครั้งแรกใช่หรือไม่
 											drawmarkstation();
+											drawliststation(resultsGlobal);
 
 										}
 									}																		
@@ -517,6 +518,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 							var lat=b[1];
 							var lon=b[0];
 							var dis=(getDistanceFromLatLonInKm(lat,lon,latUser,lonUser)).toFixed(2);
+							//console.log(dis+"--"+name+"-"+lat+"-"+lon+"-"+latUser+"-"+lonUser);
 							obList[i]['dis']=dis;
 							obList[i]['name']=name;
 							obList[i]['address']=address;
@@ -577,6 +579,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 					function onSuccess(position) {  
 						latUser=position.coords.latitude;
 						lonUser=position.coords.longitude;
+						//alert(latUser+"--"+lonUser);
 						opendb.transaction(function(tx){	// update ตำแหน่งล่าสุดลง database						
 							tx.executeSql("update locationold set lat='"+latUser+"', lon='"+lonUser+"'");
 						});
@@ -596,6 +599,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 					}				
 				, 					
 				    function onError(error) {
+					//alert("error");
 						opendb.transaction(function(tx){
 							 tx.executeSql('SELECT * FROM locationold', [], function(txs, results){ 	// select ตำแหน่งเดิม เมื่อหาตำแหน่งไม่ได้	
 								if (results.rows.length!=0)
