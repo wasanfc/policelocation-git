@@ -11,6 +11,7 @@ var markerUser;
 var markerStation=[];
 var distanceUser=20;
 var chkstart=0;
+var pageGlobal="home";
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
@@ -78,7 +79,11 @@ $$('#tab-2').on('show', function () {
 	var openpopupdis;
 	var openpopuplat;
 	var openpopuplon;
-	function openpopup(address,name,tel,tels,dis,lat,lon) {	 
+	function opendevelop(){ 
+		pageGlobal="popupde";
+	}
+	function openpopup(address,name,tel,tels,dis,lat,lon) {	
+		pageGlobal="popup";
 		var openpopupaddress=address;
 		var openpopupname=name;
 		var openpopuptel=tel;
@@ -88,13 +93,15 @@ $$('#tab-2').on('show', function () {
 		var openpopuplon=lon;
 		$('#mapdetail').css('height',$(window).height()-250);				
 		$('#bottomdetail').css('height',$(window).height()-$('#mapdetail').height()-$('.navbar').height());
+		$('#t').html('<div class="center">รายละเอียด</div>');
 		setTimeout(function(){
 			//$('#mapdetail').css('height',$(window).height()-$('.toolbar').height());				
 			initMapDetail(openpopupaddress,openpopupname,openpopuptel,openpopuptels,openpopupdis,openpopuplat,openpopuplon);
-		$('#mapdetail').css('height',$(window).height()-250);				
+
+		$('#mapdetail').css('height',$(window).height()-$('#detailstation').height()-60);				
 		$('#bottomdetail').css('height',$(window).height()-$('#mapdetail').height()-$('.navbar').height());
 		$('#t').html('<div class="center">รายละเอียด</div>');
-		},500);
+		},10);
 			var xx="'"+tel+"'";
 			var x="";
 				x+='<a href="#" onclick="callp('+xx+')" class="button button-big button-fill color-orange" style="font-size:20px;">โทรด่วน</a>';
@@ -121,9 +128,11 @@ $$('#tab-2').on('show', function () {
 	}
 
 	function closepopup(){
+		pageGlobal="home";
 		myApp.closeModal(".popup-about");
 	}
 	function closepopupdevelop(){
+		pageGlobal="home";
 		myApp.closeModal(".popup-develop");
 	}
 	$('#myForm input').on('change', function() { // เชคตั้งค่าระยะการหาสถานีตำรวจ
@@ -134,13 +143,32 @@ $$('#tab-2').on('show', function () {
 	});
 
 
-	function initMapDetail(address,name,tel,tels,dis,lat,lon) {// แผนที่ popup	 alert(address+"-"+name+"-"+tel+"-"+tels+"-"+dis+"-"+lat+"-"+lon);	
+	function initMapDetail(address,name,tel,tels,dis,lat,lon) {// แผนที่ popup	 
+		//alert(address+"-"+name+"-"+tel+"-"+tels+"-"+dis+"-"+lat+"-"+lon);
+		//var m='<img src="https://maps.googleapis.com/maps/api/directions/json?origin=Chicago,IL&destination=Los+Angeles,CA&waypoints=Joplin,MO|Oklahoma+City,OK&key=AIzaSyBN3bpGYSZ7rLkgRcrw4LzLlf13SdOGu_0">';
+
+	$.getJSON('https://maps.googleapis.com/maps/api/directions/json?origin='+lat+','+lon+'&destination='+latUser+','+lonUser+'&mode=driving&key=AIzaSyBN3bpGYSZ7rLkgRcrw4LzLlf13SdOGu_0&callback', function(data) {
+	//console.log(data.routes[0].overview_polyline.points);
+    //data is the JSON string
+var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60);
+	var m='<img src="https://maps.googleapis.com/maps/api/staticmap?size='+x+'&path=enc%3A'+data.routes[0].overview_polyline.points+'&markers=icon:https://maps.gstatic.com/mapfiles/ms2/micons/man.png%7Clabel:P%7C'+lat+','+lon+'&markers=icon:https://maps.gstatic.com/mapfiles/ms2/micons/police.png%7Clabel:U%7C'+latUser+','+lonUser+'">';
+	$('#mapdetail').html(m);
+});
+						//&markers=size:mid%7Ccolor:red%7CSan+Francisco,CA%7COakland,CA%7CSan+Jose,CA
+
+
+		//$('#mapdetail').html(m);
+
+
+
+		/*
         var directionsService = new google.maps.DirectionsService;
         var directionsDisplay = new google.maps.DirectionsRenderer({suppressMarkers: true});
 
 
 		var mapdetail = new google.maps.Map(document.getElementById('mapdetail'), {
 			center: {lat: 14.8681302, lng: 103.5141084},
+				disableDefaultUI: true,
 				zoom: 15
 		});
 		directionsDisplay.setMap(mapdetail);		
@@ -189,6 +217,7 @@ $$('#tab-2').on('show', function () {
 			content: name
 		});
 		infowindow2.open(mapdetail, m2);
+		*/
 	}
       
 
@@ -213,6 +242,23 @@ $$('#tab-2').on('show', function () {
 	var varibleloop;
 
 	  $(function(){
+		document.addEventListener("backbutton", 
+		function(e){ 
+			var page=myApp.getCurrentView().activePage; 
+			myApp.hidePreloader(); 	
+			if(pageGlobal=="popup"){ 
+				e.preventDefault(); 
+				pageGlobal="home";
+				myApp.closeModal(".popup-about");				
+			}else if(pageGlobal=="popupde"){		
+				pageGlobal="home";
+				myApp.closeModal(".popup-develop");
+			}else if(pageGlobal=="home") { 
+				navigator.app.backHistory();
+				navigator.app.exitApp();
+			}
+			
+		});
 
 			$('#menu1').html('<i class="f7-icons" style="color:#e02c2c;">collection_fill</i></a>');
 			$('#menu2').html('<i class="f7-icons color-gray">world_fill</i>');
@@ -223,8 +269,8 @@ $$('#tab-2').on('show', function () {
 			//opendb= window.openDatabase({name: "js/policelocation.db"});
 			opendb = window.openDatabase("policelocation", "1.0", "policelocation_db", 10000);
 			opendb.transaction(function(tx){					 
-				 //tx.executeSql('DROP TABLE policelocation');
-				 //tx.executeSql('DROP TABLE locationold');
+				 tx.executeSql('DROP TABLE policelocation');
+				 tx.executeSql('DROP TABLE locationold');
 				 tx.executeSql('CREATE TABLE IF NOT EXISTS policelocation (id integer NOT NULL PRIMARY KEY AUTOINCREMENT,address TEXT,name TEXT,lat TEXT)');
 				 tx.executeSql('CREATE TABLE IF NOT EXISTS locationold (id integer NOT NULL PRIMARY KEY AUTOINCREMENT,lat TEXT,lon TEXT)');
 				 tx.executeSql('SELECT * FROM policelocation', [], function(txs, results){ 		
@@ -410,7 +456,7 @@ $$('#tab-2').on('show', function () {
 									var lon=b[0];									
 									if(parseInt(getDistanceFromLatLonInKm(lat,lon,latUser,lonUser))<parseInt(distanceUser)){// เชคระยะว่าจะแสดงภายในกี่ กม.
 										var image = {
-										  url: "img/map-marker-2-xxl (1).png"
+										  url: "img/x.png"
 										};										
 										var m = new google.maps.Marker({
 											position: new google.maps.LatLng(lat, lon),
@@ -425,7 +471,7 @@ $$('#tab-2').on('show', function () {
 									var namesend="'"+name+"'";
 									var telsend="'"+tel+"'";
 									var telssend="'"+tels+"'";
-									var dissend="'"+getDistanceFromLatLonInKm(lat,lon,latUser,lonUser)+"'";
+									var dissend="'"+parseInt(getDistanceFromLatLonInKm(lat,lon,latUser,lonUser)).toFixed(2)+"'";
 									var latsend="'"+lat+"'";
 									var lonsend="'"+lon+"'";
 									
@@ -461,6 +507,7 @@ $$('#tab-2').on('show', function () {
 							obList[i]=new Array(1);
 							var x=results.rows.item(i).address;
 							var y = x.split("<br>");
+							//console.log(y);
 							var address=(y[1].replace("ที่อยู่", "")).trim();
 							var tel=(y[2].replace("เบอร์โทรศัพท์", "")).trim();
 							var tels=(y[3].replace("เบอร์โทรสาร", "")).trim();
@@ -572,6 +619,7 @@ $$('#tab-2').on('show', function () {
 			function initMap() {			// สร้าง map หลัก	
 				map = new google.maps.Map(document.getElementById('mapmain'), {
 					center: {lat: 14.8681302, lng: 103.5141084},
+    disableDefaultUI: true,
 						zoom: 15
 				});
 			}
