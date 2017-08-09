@@ -264,10 +264,10 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 			$('#menu2').html('<i class="f7-icons color-gray">world_fill</i>');
 			// แสดงไอคอนเมนูบน
 			loopgetlocationA(); // ตั้งวนลูป หาตำแหน่ง
-			
+			alert("11");
 
 			//opendb= window.openDatabase({name: "js/policelocation.db"});
-			opendb = window.openDatabase("policelocation", "1.0", "policelocation_db", 10000);
+			opendb = window.openDatabase("policelocation", "1.0", "policelocation_db", 10000);alert("22");
 			opendb.transaction(function(tx){					 
 				 tx.executeSql('DROP TABLE policelocation');
 				 tx.executeSql('DROP TABLE locationold');
