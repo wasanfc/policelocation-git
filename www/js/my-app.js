@@ -273,7 +273,8 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 				 tx.executeSql('DROP TABLE locationold');
 				 tx.executeSql('CREATE TABLE IF NOT EXISTS policelocation (id integer NOT NULL PRIMARY KEY AUTOINCREMENT,address TEXT,name TEXT,lat TEXT)');
 				 tx.executeSql('CREATE TABLE IF NOT EXISTS locationold (id integer NOT NULL PRIMARY KEY AUTOINCREMENT,lat TEXT,lon TEXT)');
-				 tx.executeSql('SELECT * FROM policelocation', [], function(txs, results){ 		
+				 tx.executeSql('SELECT * FROM policelocation', [], function(txs, results){ 
+					 alert(results.rows.length);
 					if (results.rows.length!=0)
 					{ 	resultsGlobal=results;
 						

@@ -392,6 +392,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 										}
 										if(chkstart==0){ // เชคว่าเข้าแอพเป็นครั้งแรกใช่หรือไม่
 											drawmarkstation();
+											drawliststation(resultsGlobal);
 
 										}
 									}																		
