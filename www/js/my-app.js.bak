@@ -599,7 +599,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 					}				
 				, 					
 				    function onError(error) {
-					alert("error");
+					//alert("error");
 						opendb.transaction(function(tx){
 							 tx.executeSql('SELECT * FROM locationold', [], function(txs, results){ 	// select ตำแหน่งเดิม เมื่อหาตำแหน่งไม่ได้	
 								if (results.rows.length!=0)

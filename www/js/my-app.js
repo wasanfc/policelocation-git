@@ -101,7 +101,7 @@ $$('#tab-2').on('show', function () {
 		$('#mapdetail').css('height',$(window).height()-$('#detailstation').height()-60);				
 		$('#bottomdetail').css('height',$(window).height()-$('#mapdetail').height()-$('.navbar').height());
 		$('#t').html('<div class="center">รายละเอียด</div>');
-		},10);
+		},500);
 			var xx="'"+tel+"'";
 			var x="";
 				x+='<a href="#" onclick="callp('+xx+')" class="button button-big button-fill color-orange" style="font-size:20px;">โทรด่วน</a>';
