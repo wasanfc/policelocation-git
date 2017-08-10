@@ -7,15 +7,70 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.PoliceLocation"
+        "cordova-plugin-battery-status": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-media-capture": {
+            "PACKAGE_NAME": "com.TourismSurin"
         },
         "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.PoliceLocation"
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-contacts": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-device-motion": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-device-orientation": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-globalization": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-media": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.TourismSurin"
         },
         "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.PoliceLocation"
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-vibration": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.TourismSurin"
         }
     },
-    "dependent_plugins": {}
+    "dependent_plugins": {
+        "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.TourismSurin"
+        }
+    }
 }
