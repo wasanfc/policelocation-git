@@ -91,9 +91,11 @@ $$('#tab-2').on('show', function () {
 		var openpopupdis=dis;
 		var openpopuplat=lat;
 		var openpopuplon=lon;
-		$('#mapdetail').css('height',$(window).height()-250);				
+		$('#mapdetail').css('height',$(window).height()-$('#detailstation').height()-60);				
 		$('#bottomdetail').css('height',$(window).height()-$('#mapdetail').height()-$('.navbar').height());
 		$('#t').html('<div class="center">รายละเอียด</div>');
+
+
 		setTimeout(function(){
 			//$('#mapdetail').css('height',$(window).height()-$('.toolbar').height());				
 			initMapDetail(openpopupaddress,openpopupname,openpopuptel,openpopuptels,openpopupdis,openpopuplat,openpopuplon);
