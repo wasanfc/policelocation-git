@@ -145,6 +145,7 @@ $$('#tab-2').on('show', function () {
 	   chkstart=0;
 	   var v=$('input[name=my-radio]:checked', '#myForm').val();    
 	   distanceUser=v;
+	   drawmarkstation();
 	   drawliststation(resultsGlobal);	 	   
 	});
 
