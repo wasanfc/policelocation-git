@@ -393,6 +393,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 									for (var i=0;i<results.rows.length ;i++ )
 									{
 										if(latUser!=results.rows.item(i).lat){ // เชคว่าตรงกับตำแหน่งเดิมหรือไม่
+											//alert("xxx");
 											drawmarkstation();
 											drawliststation(resultsGlobal);
 

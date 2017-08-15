@@ -387,12 +387,13 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 		  function loopgetlocationB(){ 
 						opendb.transaction(function(tx){
 							 tx.executeSql('SELECT * FROM locationold', [], function(txs, results){ 	// select ตำแหน่งเดิม เมื่อหาตำแหน่งไม่ได้
-								// alert(results.rows.item(i).lat+","+results.rows.item(i).lon+","+latUser);
+								 alert(results.rows.item(i).lat+","+results.rows.item(i).lon+","+latUser);
 								if (results.rows.length!=0)
 								{ 	 
 									for (var i=0;i<results.rows.length ;i++ )
 									{
 										if(latUser!=results.rows.item(i).lat){ // เชคว่าตรงกับตำแหน่งเดิมหรือไม่
+											alert("xxx");
 											drawmarkstation();
 											drawliststation(resultsGlobal);
 
@@ -413,7 +414,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 		  }
 
 		  function drawmarkstation(){  // มาคจุดสถานีตำรวจ
-alert("1");
+//alert("1");
 				if(timeSet==2000){ // เชคว่าเปิดหน้าแผนที่อยู่ เพื่อมาคจุดปัจจุบัน
 					var image = {
 					  url: "img/markerUser.png",
