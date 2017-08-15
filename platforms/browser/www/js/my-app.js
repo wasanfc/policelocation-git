@@ -91,9 +91,11 @@ $$('#tab-2').on('show', function () {
 		var openpopupdis=dis;
 		var openpopuplat=lat;
 		var openpopuplon=lon;
-		$('#mapdetail').css('height',$(window).height()-250);				
+		$('#mapdetail').css('height',$(window).height()-$('#detailstation').height()-60);				
 		$('#bottomdetail').css('height',$(window).height()-$('#mapdetail').height()-$('.navbar').height());
 		$('#t').html('<div class="center">รายละเอียด</div>');
+
+
 		setTimeout(function(){
 			//$('#mapdetail').css('height',$(window).height()-$('.toolbar').height());				
 			initMapDetail(openpopupaddress,openpopupname,openpopuptel,openpopuptels,openpopupdis,openpopuplat,openpopuplon);
@@ -101,7 +103,7 @@ $$('#tab-2').on('show', function () {
 		$('#mapdetail').css('height',$(window).height()-$('#detailstation').height()-60);				
 		$('#bottomdetail').css('height',$(window).height()-$('#mapdetail').height()-$('.navbar').height());
 		$('#t').html('<div class="center">รายละเอียด</div>');
-		},10);
+		},500);
 			var xx="'"+tel+"'";
 			var x="";
 				x+='<a href="#" onclick="callp('+xx+')" class="button button-big button-fill color-orange" style="font-size:20px;">โทรด่วน</a>';
@@ -380,7 +382,8 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 		  }
 		  function loopgetlocationB(){ 
 						opendb.transaction(function(tx){
-							 tx.executeSql('SELECT * FROM locationold', [], function(txs, results){ 	// select ตำแหน่งเดิม เมื่อหาตำแหน่งไม่ได้	
+							 tx.executeSql('SELECT * FROM locationold', [], function(txs, results){ 	// select ตำแหน่งเดิม เมื่อหาตำแหน่งไม่ได้
+								// alert(results.rows.item(i).lat+","+results.rows.item(i).lon+","+latUser);
 								if (results.rows.length!=0)
 								{ 	 
 									for (var i=0;i<results.rows.length ;i++ )
@@ -580,9 +583,11 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 						latUser=position.coords.latitude;
 						lonUser=position.coords.longitude;
 						//alert(latUser+"--"+lonUser);
-						opendb.transaction(function(tx){	// update ตำแหน่งล่าสุดลง database						
-							tx.executeSql("update locationold set lat='"+latUser+"', lon='"+lonUser+"'");
-						});
+						setTimeout(function(){
+							opendb.transaction(function(tx){	// update ตำแหน่งล่าสุดลง database						
+								tx.executeSql("update locationold set lat='"+latUser+"', lon='"+lonUser+"'");
+							});						
+						},10000);
 						
 
 /*

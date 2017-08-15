@@ -382,7 +382,8 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 		  }
 		  function loopgetlocationB(){ 
 						opendb.transaction(function(tx){
-							 tx.executeSql('SELECT * FROM locationold', [], function(txs, results){ 	// select ตำแหน่งเดิม เมื่อหาตำแหน่งไม่ได้	
+							 tx.executeSql('SELECT * FROM locationold', [], function(txs, results){ 	// select ตำแหน่งเดิม เมื่อหาตำแหน่งไม่ได้
+								// alert(results.rows.item(i).lat+","+results.rows.item(i).lon+","+latUser);
 								if (results.rows.length!=0)
 								{ 	 
 									for (var i=0;i<results.rows.length ;i++ )
@@ -582,9 +583,11 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 						latUser=position.coords.latitude;
 						lonUser=position.coords.longitude;
 						//alert(latUser+"--"+lonUser);
-						opendb.transaction(function(tx){	// update ตำแหน่งล่าสุดลง database						
-							tx.executeSql("update locationold set lat='"+latUser+"', lon='"+lonUser+"'");
-						});
+						setTimeout(function(){
+							opendb.transaction(function(tx){	// update ตำแหน่งล่าสุดลง database						
+								tx.executeSql("update locationold set lat='"+latUser+"', lon='"+lonUser+"'");
+							});						
+						},10000);
 						
 
 /*
