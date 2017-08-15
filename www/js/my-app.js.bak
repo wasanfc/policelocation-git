@@ -12,6 +12,7 @@ var markerStation=[];
 var distanceUser=20;
 var chkstart=0;
 var pageGlobal="home";
+var starttab2=0;
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
@@ -67,7 +68,10 @@ $$('#tab-2').on('show', function () {
 		
 	}
 	timeSet=2000;// ตั้งค่าเวลาวนลูป หน้าแผนที่
-	drawmarkstation();
+	if(starttab2==0){
+		drawmarkstation();
+		starttab2=1;
+	}
 });
 
 
@@ -394,7 +398,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 
 										}
 										if(chkstart==0){ // เชคว่าเข้าแอพเป็นครั้งแรกใช่หรือไม่
-											drawmarkstation();
+											//drawmarkstation();
 											drawliststation(resultsGlobal);
 
 										}
@@ -409,7 +413,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 		  }
 
 		  function drawmarkstation(){  // มาคจุดสถานีตำรวจ
-
+alert("1");
 				if(timeSet==2000){ // เชคว่าเปิดหน้าแผนที่อยู่ เพื่อมาคจุดปัจจุบัน
 					var image = {
 					  url: "img/markerUser.png",
@@ -587,7 +591,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 							opendb.transaction(function(tx){	// update ตำแหน่งล่าสุดลง database						
 								tx.executeSql("update locationold set lat='"+latUser+"', lon='"+lonUser+"'");
 							});						
-						},2000);
+						},10000);
 						
 
 /*
