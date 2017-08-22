@@ -13,15 +13,21 @@ var distanceUser=20;
 var chkstart=0;
 var pageGlobal="home";
 var starttab2=0;
+var datasearch;
+var chkpage="home";
+var chkleg=0;
+var thisvalue=0;
+
 // If we need to use custom DOM library, let's save it to $$ variable:
 var $$ = Dom7;
 
 // Add view
 var mainView = myApp.addView('.view-main', {
-    // Because we want to use dynamic navbar, we need to enable it for this view:
-    dynamicNavbar: true
+    // Enable dynamic Navbar
+    dynamicNavbar: true,
+    // Enable Dom Cache so we can use all inline pages
+    domCache: true
 });
-
 // Handle Cordova Device Ready Event
 $$(document).on('deviceready', function() {
     console.log("Device is ready!");
@@ -56,9 +62,11 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
 $$('#tab-1').on('show', function () {  
 	$('#menu1').html('<i class="f7-icons" style="color:#e02c2c;">collection_fill</i></a>');
 	$('#menu2').html('<i class="f7-icons color-gray">world_fill</i>');
+	chkpage="home";
 	timeSet=10000;// ตั้งค่าเวลาวนลูป หน้าแผนที่
 });
 $$('#tab-2').on('show', function () {  
+	chkpage="map";
 	chkstart=0;//ตั้งเชค ให้เหมือนเริ่มแอพ
 	$('#menu1').html('<i class="f7-icons color-gray">collection_fill</i></a>');
 	$('#menu2').html('<i class="f7-icons" style="color:#e02c2c;">world_fill</i>');
@@ -250,6 +258,32 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 	var varibleloop;
 
 	  $(function(){
+
+
+// Fruits data demo array
+/*
+var fruits = ('Apple Apricot Avocado Banana Melon Orange Peach Pear Pineapple').split(' ');
+var autocompleteDropdownExpand = myApp.autocomplete({
+    input: '#autocomplete-dropdown-expand',
+    openIn: 'dropdown',
+    expandInput: true, // expand input
+    source: function (autocomplete, query, render) {
+        var results = [];
+        if (query.length === 0) {
+            render(results);
+            return;
+        }
+        // Find matched items
+		//alert(fruits.length);
+        for (var i = 0; i < fruits.length; i++) {
+            if (fruits[i].toLowerCase().indexOf(query.toLowerCase()) >= 0) results.push(fruits[i]);
+        }
+        // Render items by passing array with result items
+        render(results);
+    }
+});
+*/
+
 		document.addEventListener("backbutton", 
 		function(e){ 
 			var page=myApp.getCurrentView().activePage; 
@@ -262,8 +296,14 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 				pageGlobal="home";
 				myApp.closeModal(".popup-develop");
 			}else if(pageGlobal=="home") { 
+				if(chkpage!="home"){ 
+					myApp.showTab('#tab-1');
+
+				}else{ 
 				navigator.app.backHistory();
 				navigator.app.exitApp();
+				
+				}
 			}
 			
 		});
@@ -337,10 +377,11 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 			
 			}, null, null);	
 		});
-
-
 			$('#searchstation').keyup(function() {
-				var data = this.value; 
+
+				var data = this.value;
+				thisvalue=this.value.length
+				
 				if(data!=null){ 
 					clearInterval(varibleloop);
 					distanceUser=5000;//เซตระยะค้นหา เมื่อค้นหาสถานีทั้งหมด
@@ -350,15 +391,59 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 				if(data==""){ 
 					var v=$('input[name=my-radio]:checked', '#myForm').val();    
 					distanceUser=v;
-					drawliststation(resultsGlobal);
+					
+					if(chkpage="map"){
+						drawmarkstation();
+					}else{
+						drawliststation(resultsGlobal);
+					}
 				}
 				
 				
 			});
 
+
+/*
+			$('#searchstation').keyup(function() {
+				var data = this.value; 
+				datasearch=data; 
+				if(data!=""){
+					$('#liststation').hide();
+					opendb.transaction(function(tx){ 
+					tx.executeSql("SELECT * FROM policelocation WHERE name LIKE '%"+datasearch+"%'", [], function(txs, results){ 	// select ตำแหน่งเดิม เมื่อเริ่มแอพ				
+						if (results.rows.length!=0)
+						{ 	
+							var x='<div class="list-block" style="padding:0px;margin:0px;">';
+								x+='<ul>';						
+							
+							for (var i=0;i<results.rows.length ;i++ )
+							{
+								var name=results.rows.item(i).name;
+								x+='<li class="item-content"><div class="item-inner"><div class="item-title">'+name+'</div></div></li>';
+							}
+							x+="</ul>";
+							x+="</div>";
+							$('#listserach').html(x);
+
+						}else{
+							$('#listserach').html("<div style='font-size:14px;color:#707070;padding:10px;'>ไม่พบสถานีตำรวจที่ค้นหา</div>");
+						}
+					});
+					});
+				}else{
+					$('#listserach').html("");
+					$('#liststation').show();
+				}
+			});
+			*/
+
+
+
 	  });
+
+
 		
-		var datasearch;
+		
 		function searchstation(data){ //ค้นหาสถานีตำรวจ 
 			datasearch=data; 
 			opendb.transaction(function(tx){ 
@@ -366,14 +451,30 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 				if (results.rows.length!=0)
 				{ 	
 					resultsGlobal=results;
-					drawliststation(resultsGlobal); // สร้าง list สถานีตำรวจ
+					if(chkpage="home"){
+						drawliststation(resultsGlobal); // สร้าง list สถานีตำรวจ
+					}
+					
 					if($('#searchstation').val()==""){
 					   var v=$('input[name=my-radio]:checked', '#myForm').val();    //เซตระยะทางค้นหาสถานี เป็นตัวที่ตั้งไว้
 					   distanceUser=v;
 						loopgetlocationB();
 						loopgetlocationA();// เริ่มวนลูป
 					}
-					drawmarkstation();
+
+
+
+					if(chkpage="map"){
+
+						if(chkleg<thisvalue){
+							drawmarkstation();
+
+						}else{
+							//alert("ลบ");
+						}
+						chkleg=thisvalue;
+						
+					}
 				}else{
 					$('#liststation').html("<li><div style='font-size:14px;color:#707070;padding:10px;'>ไม่พบสถานีตำรวจที่ค้นหา</div></li>");
 				}
@@ -386,6 +487,8 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 			  //setTimeout(function(){loopgetlocationB();},timeSet);
 				varibleloop = setInterval(function(){loopgetlocationB();},timeSet);
 		  }
+
+		  /*
 		  function loopgetlocationB(){ 
 						opendb.transaction(function(tx){
 							 tx.executeSql('SELECT * FROM locationold', [], function(txs, results){ 	// select ตำแหน่งเดิม เมื่อหาตำแหน่งไม่ได้
@@ -414,6 +517,17 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 							});
 						});
 		  }
+		  */
+
+		  function loopgetlocationB(){ 
+				if(chkstart==0){ // เชคว่าเข้าแอพเป็นครั้งแรกใช่หรือไม่
+					//drawmarkstation();
+					drawliststation(resultsGlobal);
+					chkstart=1;
+				}
+				getLocationUser();
+		  }
+
 
 		  function drawmarkstation(){  // มาคจุดสถานีตำรวจ
 //alert("1");
@@ -589,12 +703,33 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 					function onSuccess(position) {  
 						latUser=position.coords.latitude;
 						lonUser=position.coords.longitude;
-						//alert(latUser+"--"+lonUser);
-						setTimeout(function(){
-							opendb.transaction(function(tx){	// update ตำแหน่งล่าสุดลง database						
-								tx.executeSql("update locationold set lat='"+latUser+"', lon='"+lonUser+"'");
-							});						
-						},10000);
+						//alert(parseFloat(latUser)+"--"+parseFloat(lonUser));
+
+						opendb.transaction(function(tx){
+							 tx.executeSql('SELECT * FROM locationold', [], function(txs, results){ 	// select ตำแหน่งเดิม เมื่อหาตำแหน่งไม่ได้
+								 //alert(results.rows.item(i).lat+","+results.rows.item(i).lon+","+latUser);
+									 
+									for (var i=0;i<results.rows.length ;i++ )
+									{
+										if(latUser!=results.rows.item(i).lat){ // เชคว่าตรงกับตำแหน่งเดิมหรือไม่
+											//alert("xxx");
+											drawmarkstation();
+											drawliststation(resultsGlobal);
+
+										}
+									}																		
+								
+									opendb.transaction(function(tx){	// update ตำแหน่งล่าสุดลง database						
+										tx.executeSql("update locationold set lat='"+latUser+"', lon='"+lonUser+"'");
+									});						
+								
+																		
+
+							});
+						});
+
+
+
 						
 
 /*

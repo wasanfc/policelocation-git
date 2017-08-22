@@ -14,7 +14,7 @@
 
     <!-- Required meta tags-->
     <meta charset="utf-8">
-<meta http-equiv="Content-Security-Policy" content="default-src * gap://ready file:; style-src 'self' 'unsafe-inline'; img-src 'self' data:; script-src * 'unsafe-inline' 'unsafe-eval'">
+
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
@@ -170,10 +170,14 @@
 									<a href="#" class="searchbar-clear"></a>
 								</div>
 								<a href="#" class="searchbar-cancel">Cancel</a>
-							</form>					
+							</form>				
+							
+
+
 					
 					</div>
-                    <div class="right">
+                    <div class="right" style="padding-right:10px;">
+					<a href="#" onclick="searchstationtext()"><i class="f7-icons color-white">search_strong</i></a>
                         <!--
                           Right link contains only icon - additional "icon-only" class
                           Additional "open-panel" class tells app to open panel when we click on this link
@@ -204,10 +208,15 @@
 						<div class="page-content">
 							<div class="tabs tabs-top" >
 									<div id="tab-1" class="tab  active">
+
 										<div class="content-block"  style="padding:0px;margin:0px;">
 										
 
 												<div class="list-block" style="padding:0px;margin:0px;">
+
+<div id="listserach"></div>
+
+
 													<ul>
 														<div id="liststation"></div>																													
 													</ul>
