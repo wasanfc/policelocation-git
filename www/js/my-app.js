@@ -71,6 +71,7 @@ $$('#tab-2').on('show', function () {
 	$('#menu1').html('<i class="f7-icons color-gray">collection_fill</i></a>');
 	$('#menu2').html('<i class="f7-icons" style="color:#e02c2c;">world_fill</i>');
 	$('#mapmain').css('height',$(window).height());
+	setTimeout(function(){$('#mapmain').css('height',$(window).height());},500);
 	if(markerUser==null){// เชคว่าเข้าหน้าแผนที่ครั้งแรกจาก markerUser
 		initMap();	
 		
@@ -485,6 +486,7 @@ var autocompleteDropdownExpand = myApp.autocomplete({
 
 		  function loopgetlocationA(){
 			  //setTimeout(function(){loopgetlocationB();},timeSet);
+				clearInterval(varibleloop);
 				varibleloop = setInterval(function(){loopgetlocationB();},timeSet);
 		  }
 

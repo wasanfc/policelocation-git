@@ -296,10 +296,10 @@ var autocompleteDropdownExpand = myApp.autocomplete({
 				pageGlobal="home";
 				myApp.closeModal(".popup-develop");
 			}else if(pageGlobal=="home") { 
-				if(chkpage!="home"){ alert("11");
+				if(chkpage!="home"){ 
 					myApp.showTab('#tab-1');
 
-				}else{ alert("22");
+				}else{ 
 				navigator.app.backHistory();
 				navigator.app.exitApp();
 				
@@ -485,6 +485,7 @@ var autocompleteDropdownExpand = myApp.autocomplete({
 
 		  function loopgetlocationA(){
 			  //setTimeout(function(){loopgetlocationB();},timeSet);
+				clearInterval(varibleloop);
 				varibleloop = setInterval(function(){loopgetlocationB();},timeSet);
 		  }
 
