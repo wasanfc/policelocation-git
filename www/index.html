@@ -149,24 +149,56 @@
     <div class="views">
         <!-- Your main view, should have "view-main" class -->
         <div class="view view-main">
+
+<style>
+#spsrceen{
+	width:100%;
+	height:100%;
+	background:#f6f6f6;
+	z-index:999;
+	position:fixed;
+	top:0px;
+	left:0px;
+}
+#imgspsrceen{
+    position: absolute;
+    top: 40%;
+    left: 50%;
+	margin:-75px;
+	width:150px;
+	
+}
+#textspsrceen{
+	color:#e9e9e9;
+    position: absolute;
+    top: 70%;
+    left: 50%;
+	width:200px;
+	margin-left:-100px;
+}
+.color-customx { color: #333333 }
+</style>
+
+<div id="spsrceen"><img src="img/logo_copy.png" id="imgspsrceen"><img src="img/Untitled-2.png" id="textspsrceen"></div>
+
             <!-- Top Navbar-->
-            <div class="navbar" style="background:#e02c2c;">
+            <div class="navbar" style="background:#FFF;">
                 <div class="navbar-inner">
                     <div class="left">
                         <!--
                           Right link contains only icon - additional "icon-only" class
                           Additional "open-panel" class tells app to open panel when we click on this link
                         -->
-                        <a href="#" class="link icon-only open-panel"><i class="icon icon-bars"></i></a>
+                        <a href="#" class="link icon-only open-panel"><i class="f7-icons color-customx">bars</i></a>
                     </div>
 
                     <!-- We need cool sliding animation on title element, so we have additional "sliding" class -->
                     <div class="center sliding">
 					
 							<!-- Search Bar -->
-							<form class="searchbar"  style="background:#e02c2c;">
+							<form class="searchbar"  style="background:#FFF;color:#000;">
 								<div class="searchbar-input">
-									<input type="search" placeholder="ค้นหาสถานีตำรวจ" id="searchstation">
+									<input type="search" placeholder="ค้นหาสถานีตำรวจ" id="searchstation" >
 									<a href="#" class="searchbar-clear"></a>
 								</div>
 								<a href="#" class="searchbar-cancel">Cancel</a>
@@ -195,6 +227,7 @@
 							<div class="toolbar-inner">
 								<a href="#tab-1" class="tab-link active"><span id="menu1"></span></a>
 								<a href="#tab-2" class="tab-link"><span id="menu2"></span></a>
+								<img src="img/Untitled-1.png" style="width:100px;position:fixed;right:0px;">
 							</div>
 						</div><!-- แถบเมนู -->
 
@@ -235,7 +268,7 @@
 
 	  <!-- About Popup รายละเอียด -->
 	  <div class="popup popup-about">
-				<div class="navbar"  style="background:#e02c2c;">
+				<div class="navbar"  style="background:#f6f6f6;color:#0093d8;">
 					  <div class="navbar-inner">
 						<div class="left">&nbsp;&nbsp;&nbsp;<i class="f7-icons" onclick="closepopup()">arrow_left</i></div>
 						<div id="t"></div>
@@ -259,7 +292,7 @@
 
 	  <!-- About Popup รายละเอียด -->
 	  <div class="popup popup-develop">
-				<div class="navbar"  style="background:#e02c2c;">
+				<div class="navbar"  style="background:#f6f6f6;color:#0093d8;">
 					  <div class="navbar-inner">
 						<div class="left">&nbsp;&nbsp;&nbsp;<i class="f7-icons" onclick="closepopupdevelop()">arrow_left</i></div>
 						<div class="center">ผู้พัฒนา</div>

@@ -60,23 +60,44 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
 })
 
 $$('#tab-1').on('show', function () {  
-	$('#menu1').html('<i class="f7-icons" style="color:#e02c2c;">collection_fill</i></a>');
+	$('#menu1').html('<i class="f7-icons" style="color:#0093d8;">collection_fill</i></a>');
 	$('#menu2').html('<i class="f7-icons color-gray">world_fill</i>');
 	chkpage="home";
 	timeSet=10000;// ตั้งค่าเวลาวนลูป หน้าแผนที่
+	$('#searchstation').val("");	
+				if($('#searchstation').val()==""){ 
+					var v=$('input[name=my-radio]:checked', '#myForm').val();    
+					distanceUser=v;
+			opendb.transaction(function(tx){					 
+				 tx.executeSql('SELECT * FROM policelocation', [], function(txs, results){ 					 
+					if (results.rows.length!=0)
+					{ 	resultsGlobal=results;					
+						drawliststation(resultsGlobal);
+					}
+				 });
+			});
+				}
+
 });
 $$('#tab-2').on('show', function () {  
 	chkpage="map";
 	chkstart=0;//ตั้งเชค ให้เหมือนเริ่มแอพ
 	$('#menu1').html('<i class="f7-icons color-gray">collection_fill</i></a>');
-	$('#menu2').html('<i class="f7-icons" style="color:#e02c2c;">world_fill</i>');
+	$('#menu2').html('<i class="f7-icons" style="color:#0093d8;">world_fill</i>');
 	$('#mapmain').css('height',$(window).height());
+	setTimeout(function(){$('#mapmain').css('height',$(window).height());},500);
+
+	$('#searchstation').val("");		
+
+
 	if(markerUser==null){// เชคว่าเข้าหน้าแผนที่ครั้งแรกจาก markerUser
 		initMap();	
 		
 	}
 	timeSet=2000;// ตั้งค่าเวลาวนลูป หน้าแผนที่
 	if(starttab2==0){
+		var v=$('input[name=my-radio]:checked', '#myForm').val();    
+		distanceUser=v;
 		drawmarkstation();
 		starttab2=1;
 	}
@@ -259,7 +280,7 @@ var x=$(window).width()+'x'+($(window).height()-$('#detailstation').height()-60)
 
 	  $(function(){
 
-
+setTimeout(function(){$('#spsrceen').fadeOut();},3000);
 // Fruits data demo array
 /*
 var fruits = ('Apple Apricot Avocado Banana Melon Orange Peach Pear Pineapple').split(' ');
@@ -308,7 +329,7 @@ var autocompleteDropdownExpand = myApp.autocomplete({
 			
 		});
 
-			$('#menu1').html('<i class="f7-icons" style="color:#e02c2c;">collection_fill</i></a>');
+			$('#menu1').html('<i class="f7-icons" style="color:#0093d8;">collection_fill</i></a>');
 			$('#menu2').html('<i class="f7-icons color-gray">world_fill</i>');
 			// แสดงไอคอนเมนูบน
 			loopgetlocationA(); // ตั้งวนลูป หาตำแหน่ง
@@ -386,6 +407,7 @@ var autocompleteDropdownExpand = myApp.autocomplete({
 					clearInterval(varibleloop);
 					distanceUser=5000;//เซตระยะค้นหา เมื่อค้นหาสถานีทั้งหมด
 					searchstation(data);
+					starttab2=0;
 				}
 				
 				if(data==""){ 
@@ -532,6 +554,7 @@ var autocompleteDropdownExpand = myApp.autocomplete({
 
 		  function drawmarkstation(){  // มาคจุดสถานีตำรวจ
 //alert("1");
+alert(distanceUser);
 				if(timeSet==2000){ // เชคว่าเปิดหน้าแผนที่อยู่ เพื่อมาคจุดปัจจุบัน
 					var image = {
 					  url: "img/markerUser.png",
@@ -556,9 +579,9 @@ var autocompleteDropdownExpand = myApp.autocomplete({
 
 					opendb.transaction(function(tx){ // หาตำแหน่งสถานีตำรวจ	
 						var sql=""; 
-						if($('#searchstation').val()==""){
+						if($('#searchstation').val()==""){ 
 							sql="SELECT * FROM policelocation";
-						}else{
+						}else{ 
 							sql="SELECT * FROM policelocation WHERE name LIKE '%"+$('#searchstation').val()+"%'";
 						}
 						 tx.executeSql(sql, [], function(txs, results){ 		
@@ -581,12 +604,13 @@ var autocompleteDropdownExpand = myApp.autocomplete({
 									var lat=b[1];
 									var lon=b[0];									
 									if(parseInt(getDistanceFromLatLonInKm(lat,lon,latUser,lonUser))<parseInt(distanceUser)){// เชคระยะว่าจะแสดงภายในกี่ กม.
+
 										var image = {
 										  url: "img/x.png"
 										};			
 										var m = new google.maps.Marker({
 											position: new google.maps.LatLng(lat, lon),
-											icon:image,
+											
 											map: map
 										});	
 										bounds.extend(new google.maps.LatLng(lat, lon));
