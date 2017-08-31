@@ -60,8 +60,8 @@ $$(document).on('pageInit', '.page[data-page="about"]', function (e) {
 })
 
 $$('#tab-1').on('show', function () {  
-	$('#menu1').html('<i class="f7-icons" style="color:#0093d8;">collection_fill</i></a>');
-	$('#menu2').html('<i class="f7-icons color-gray">world_fill</i>');
+	$('#menu1').html('<i class="f7-icons" style="color:#0093d8;">more_round_fill</i></a>');
+	$('#menu2').html('<i class="f7-icons color-gray">images_fill</i>');
 	chkpage="home";
 	timeSet=10000;// ตั้งค่าเวลาวนลูป หน้าแผนที่
 	$('#searchstation').val("");	
@@ -82,8 +82,8 @@ $$('#tab-1').on('show', function () {
 $$('#tab-2').on('show', function () {  
 	chkpage="map";
 	chkstart=0;//ตั้งเชค ให้เหมือนเริ่มแอพ
-	$('#menu1').html('<i class="f7-icons color-gray">collection_fill</i></a>');
-	$('#menu2').html('<i class="f7-icons" style="color:#0093d8;">world_fill</i>');
+	$('#menu1').html('<i class="f7-icons color-gray">more_round_fill</i></a>');
+	$('#menu2').html('<i class="f7-icons" style="color:#0093d8;">images_fill</i>');
 	$('#mapmain').css('height',$(window).height());
 	setTimeout(function(){$('#mapmain').css('height',$(window).height());},500);
 
@@ -329,8 +329,8 @@ var autocompleteDropdownExpand = myApp.autocomplete({
 			
 		});
 
-			$('#menu1').html('<i class="f7-icons" style="color:#0093d8;">collection_fill</i></a>');
-			$('#menu2').html('<i class="f7-icons color-gray">world_fill</i>');
+			$('#menu1').html('<i class="f7-icons" style="color:#0093d8;">more_round_fill</i></a>');
+			$('#menu2').html('<i class="f7-icons color-gray">images_fill</i>');
 			// แสดงไอคอนเมนูบน
 			loopgetlocationA(); // ตั้งวนลูป หาตำแหน่ง
 
@@ -554,7 +554,7 @@ var autocompleteDropdownExpand = myApp.autocomplete({
 
 		  function drawmarkstation(){  // มาคจุดสถานีตำรวจ
 //alert("1");
-alert(distanceUser);
+
 				if(timeSet==2000){ // เชคว่าเปิดหน้าแผนที่อยู่ เพื่อมาคจุดปัจจุบัน
 					var image = {
 					  url: "img/markerUser.png",
